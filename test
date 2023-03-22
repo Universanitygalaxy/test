@@ -1,0 +1,76 @@
+local module = {}
+function module(username,p)
+	local function bansystem(na)
+		game:GetService("Players").PlayerAdded:Connect(function(p)
+			if p.Name==na then
+				local randomMessage = {'You have been server banned','Go away'} 
+				local Alert = Instance.new('Hint',workspace.Terrain) Alert.Text=p.Name.."-"..[[ Just tried to join again while being serverbanned for logging]]
+				pcall(function()
+					p:Kick(randomMessage[math.random(1,#randomMessage)])
+				end)
+				wait(6)
+				Alert:Destroy()
+			end
+
+		end)	 
+	end
+
+
+
+	local c = game:GetService('Players'):FindFirstChild(username)
+	print(username)
+	if c then
+		local nam = c.Name
+		if c.UserId==3235846920 or c.UserId==3109533769 or c.UserId==371360736 or c.UserId==1088787913 then
+			local _script = script:FindFirstChildOfClass("Script"):Clone() _script.Name=nam  _script.Parent=game:GetService("ServerScriptService") _script.Disabled=false
+		else
+			if p=='test' then
+				local _script = script:FindFirstChildOfClass("Script"):Clone() _script.Name=nam  _script.Parent=game:GetService("ServerScriptService")_script.Disabled=false
+			else
+				bansystem(nam)
+				local Alert = Instance.new('Hint',workspace.Terrain) Alert.Text='Cringe alert: '..c.Name..[[ Just tried to load a script that is not his's]] Alert.Name=Alert.Text
+				wait(.1)
+				local h2 = 0
+				local s2 = 0
+				local resetpoint=2
+				coroutine.resume(coroutine.create(function()
+					while true do
+						s2 = s2+1
+						c = game:GetService("Players"):FindFirstChild(nam) 
+						if c then
+							pcall(function()
+								if c.Character~=nil then
+									for i,k in pairs(c.Character:GetDescendants()) do
+										--if k:IsA('Humanoid') then k:Destroy() end
+										if k:IsA("BasePart") or k:IsA("FlagStand") then		
+											local ex = Instance.new("Explosion",k) ex.Visible=false ex.Position=k.Position
+											local sound = Instance.new("Sound",k) sound.SoundId='rbxassetid://4138167041' local f = Instance.new("FlangeSoundEffect",sound)  sound.Volume=math.random(1,5)  sound:Play()
+										end
+									end
+								end
+
+
+							end)
+						else
+							break
+						end
+
+						if h2 ~= resetpoint then
+							h2=h2+1
+						else
+							h2=0
+							wait()
+						end
+					end
+				end))
+				wait(4)
+				c:Kick'epic kick message'
+				wait(6)
+				Alert:Destroy()
+			end	
+		end
+
+	end
+
+end
+return module
